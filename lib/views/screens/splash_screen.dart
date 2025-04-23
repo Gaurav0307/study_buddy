@@ -1,9 +1,9 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:study_buddy/views/screens/login_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:study_buddy/views/screens/login_screen.dart';
 
 import '../../common/constants/asset_constants.dart';
 import '../../common/constants/color_constants.dart';
@@ -22,14 +22,13 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    // TODO: implement initState
     SystemChrome.setEnabledSystemUIMode(
       SystemUiMode.manual,
       overlays: [],
     );
 
     SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(
+      const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.light,
       ),
@@ -77,7 +76,7 @@ class _SplashScreenState extends State<SplashScreen> {
           padding: const EdgeInsets.all(0.0),
           decoration: BoxDecoration(
             color: ColorConstants.theBlack,
-            image: DecorationImage(
+            image: const DecorationImage(
               image: AssetImage(AssetConstants.backgroundImage1),
               fit: BoxFit.fitHeight,
               opacity: 0.5,

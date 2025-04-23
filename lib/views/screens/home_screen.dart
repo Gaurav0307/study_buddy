@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:study_buddy/common/constants/asset_constants.dart';
 import 'package:study_buddy/common/constants/string_constants.dart';
 import 'package:study_buddy/views/screens/branches_screen.dart';
@@ -5,9 +8,6 @@ import 'package:study_buddy/views/screens/downloads_screen.dart';
 import 'package:study_buddy/views/screens/history_screen.dart';
 import 'package:study_buddy/views/screens/liked_videos_screen.dart';
 import 'package:study_buddy/views/screens/login_screen.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 
 import '../../common/constants/storage_constants.dart';
 import '../../common/global/global.dart';
@@ -21,6 +21,26 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
+  void initState() {
+    SystemChrome.setEnabledSystemUIMode(
+      SystemUiMode.manual,
+      overlays: [
+        SystemUiOverlay.top,
+        SystemUiOverlay.bottom,
+      ],
+    );
+
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+      ),
+    );
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return PopScope(
       canPop: false, //It should be false to work
@@ -33,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.blue.shade100,
-          title: Text(
+          title: const Text(
             StringConstants.appName,
             style: TextStyle(
               fontWeight: FontWeight.w600,
@@ -51,8 +71,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     vertical: 10.0,
                     horizontal: 10.0,
                   ),
-                  decoration: BoxDecoration(
-                    gradient: const LinearGradient(
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
                       colors: [
                         Colors.blue,
                         Colors.purple,
@@ -70,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         fit: BoxFit.cover,
                       ),
                       const SizedBox(height: 10.0),
-                      Text(
+                      const Text(
                         "Student Name",
                         textAlign: TextAlign.center,
                         style: TextStyle(
@@ -83,15 +103,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 ListTile(
-                  leading: Icon(Icons.download),
-                  title: Text(
+                  leading: const Icon(Icons.download),
+                  title: const Text(
                     StringConstants.downloads,
                     style: TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  trailing: Icon(
+                  trailing: const Icon(
                     Icons.arrow_forward_ios,
                     size: 16.0,
                   ),
@@ -100,15 +120,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                 ),
                 ListTile(
-                  leading: Icon(Icons.favorite_border),
-                  title: Text(
+                  leading: const Icon(Icons.favorite_border),
+                  title: const Text(
                     StringConstants.likedVideos,
                     style: TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  trailing: Icon(
+                  trailing: const Icon(
                     Icons.arrow_forward_ios,
                     size: 16.0,
                   ),
@@ -117,15 +137,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                 ),
                 ListTile(
-                  leading: Icon(Icons.history),
-                  title: Text(
+                  leading: const Icon(Icons.history),
+                  title: const Text(
                     StringConstants.history,
                     style: TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  trailing: Icon(
+                  trailing: const Icon(
                     Icons.arrow_forward_ios,
                     size: 16.0,
                   ),
@@ -133,10 +153,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     Get.to(() => const HistoryScreen());
                   },
                 ),
-                Spacer(),
+                const Spacer(),
                 ListTile(
-                  leading: Icon(Icons.logout),
-                  title: Text(
+                  leading: const Icon(Icons.logout),
+                  title: const Text(
                     StringConstants.logout,
                     style: TextStyle(
                         fontSize: 18.0,
@@ -162,7 +182,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
-        body: BranchesScreen(),
+        body: const BranchesScreen(),
       ),
     );
   }

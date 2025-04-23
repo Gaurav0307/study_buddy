@@ -1,5 +1,5 @@
 class StringConstants {
-  static const String appName = "eLibrary";
+  static const String appName = "Study Buddy";
   static const String confirm = "Confirm";
   static const String doYouWantToExitTheApp = "Do you want to exit the App?";
   static const String yes = "Yes";
