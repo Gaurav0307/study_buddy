@@ -1,6 +1,8 @@
-import 'package:study_buddy/views/screens/contents_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:study_buddy/views/screens/contents_screen.dart';
+
+import '../../controllers/data_controller.dart';
 
 class YearsScreen extends StatefulWidget {
   final String branchName;
@@ -28,6 +30,15 @@ class _YearsScreenState extends State<YearsScreen> {
     Colors.purple,
   ];
 
+  var dataController = Get.put(DataController());
+
+  @override
+  void initState() {
+    super.initState();
+
+    years = dataController.branchesAndYearsModel.value.data!.years!.toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +47,7 @@ class _YearsScreenState extends State<YearsScreen> {
         title: Text(
           widget.branchName,
           // StringConstants.years,
-          style: TextStyle(
+          style: const TextStyle(
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -59,7 +70,7 @@ class _YearsScreenState extends State<YearsScreen> {
                 backgroundColor: colors[index],
                 child: Text(
                   "${index + 1}",
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 22.0,
                     fontWeight: FontWeight.w600,
@@ -68,7 +79,7 @@ class _YearsScreenState extends State<YearsScreen> {
               ),
               title: Text(
                 years[index],
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 20.0,
                   fontWeight: FontWeight.w600,
                 ),

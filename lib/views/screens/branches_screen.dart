@@ -1,8 +1,11 @@
-import 'package:study_buddy/views/screens/years_screen.dart';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:study_buddy/views/screens/years_screen.dart';
 
 import '../../common/constants/asset_constants.dart';
+import '../../controllers/data_controller.dart';
 
 class BranchesScreen extends StatefulWidget {
   const BranchesScreen({super.key});
@@ -24,6 +27,19 @@ class _BranchesScreenState extends State<BranchesScreen> {
     AssetConstants.mechanicalEng,
     AssetConstants.electricalEng,
   ];
+
+  var dataController = Get.put(DataController());
+
+  @override
+  void initState() {
+    super.initState();
+
+    log("Data :-> ${dataController.branchesAndYearsModel.value.data}");
+
+    branchNames =
+        dataController.branchesAndYearsModel.value.data!.branches!.toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -40,10 +56,11 @@ class _BranchesScreenState extends State<BranchesScreen> {
               horizontal: 15.0,
               vertical: 10.0,
             ),
-            leading: Image.asset(branchImages[index]),
+            // leading: Image.asset(branchImages[index]),
+            leading: Image.asset(AssetConstants.mechanicalEng),
             title: Text(
               branchNames[index],
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 20.0,
                 fontWeight: FontWeight.w600,
               ),

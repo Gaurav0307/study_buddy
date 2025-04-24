@@ -1,9 +1,11 @@
-import 'package:study_buddy/common/constants/string_constants.dart';
-import 'package:study_buddy/common/global/global.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:study_buddy/common/constants/string_constants.dart';
+import 'package:study_buddy/common/global/global.dart';
 
 import '../../common/services/file_downloader.dart';
+import '../../common/utils/utility_methods.dart';
+import '../../controllers/data_controller.dart';
 import '../widgets/no_data.dart';
 import 'file_viewer.dart';
 
@@ -21,22 +23,38 @@ class _HistoryScreenState extends State<HistoryScreen> {
 
   List<MyDownloader> myDownloaderList = [];
 
+  var dataController = Get.put(DataController());
+
   @override
   void initState() {
-    // TODO: implement initState
     loadData();
     super.initState();
   }
 
   void loadData() {
+    // allData = [
+    //   ...documents.where((content) =>
+    //       sharedPreferences!.containsKey(key) &&
+    //       sharedPreferences!.getStringList(key)!.contains(content['link']!)),
+    //   ...images.where((content) =>
+    //       sharedPreferences!.containsKey(key) &&
+    //       sharedPreferences!.getStringList(key)!.contains(content['link']!)),
+    //   ...videos.where((content) =>
+    //       sharedPreferences!.containsKey(key) &&
+    //       sharedPreferences!.getStringList(key)!.contains(content['link']!)),
+    // ];
+
+    var _data = dataController.contentModel.value.data!.map((e) {
+      return {
+        "name": e.question,
+        "link": UtilityMethods.getProperFileUrl(e.image ?? "")
+      };
+    }).toList();
+
+    _data = _data.where((content) => content['link'] != null).toList();
+
     allData = [
-      ...documents.where((content) =>
-          sharedPreferences!.containsKey(key) &&
-          sharedPreferences!.getStringList(key)!.contains(content['link']!)),
-      ...images.where((content) =>
-          sharedPreferences!.containsKey(key) &&
-          sharedPreferences!.getStringList(key)!.contains(content['link']!)),
-      ...videos.where((content) =>
+      ..._data.where((content) =>
           sharedPreferences!.containsKey(key) &&
           sharedPreferences!.getStringList(key)!.contains(content['link']!)),
     ];

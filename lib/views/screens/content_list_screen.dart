@@ -1,9 +1,10 @@
-import 'package:study_buddy/common/constants/string_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:study_buddy/common/constants/string_constants.dart';
+import 'package:study_buddy/common/utils/utility_methods.dart';
 
-import '../../common/global/global.dart';
 import '../../common/services/file_downloader.dart';
+import '../../controllers/data_controller.dart';
 import 'file_viewer.dart';
 
 class ContentListScreen extends StatefulWidget {
@@ -25,17 +26,43 @@ class _ContentListScreenState extends State<ContentListScreen> {
 
   List<MyDownloader> myDownloaderList = [];
 
+  var dataController = Get.put(DataController());
+
   @override
   void initState() {
-    // TODO: implement initState
     if (widget.content == StringConstants.notes ||
         widget.content == StringConstants.questionPapers ||
         widget.content == StringConstants.subjects ||
         widget.content == StringConstants.syllabus) {
-      allData = [...documents, ...images];
+      // allData = [...documents, ...images];
+
+      allData = [
+        ...dataController.contentModel.value.data!.map((e) {
+          if (e.questionType == "image" || e.questionType == "pdf") {
+            return {
+              "name": e.question,
+              "link": UtilityMethods.getProperFileUrl(e.image ?? "")
+            };
+          }
+        })
+      ];
     } else {
-      allData = [...videos];
+      // allData = [...videos];
+
+      allData = [
+        ...dataController.contentModel.value.data!.map((e) {
+          if (e.questionType == "video") {
+            return {
+              "name": e.question,
+              "link": UtilityMethods.getProperFileUrl(e.image ?? "")
+            };
+          }
+        })
+      ];
     }
+
+    allData = allData.where((content) => content != null).toList();
+
     myDownloaderList = List.generate(allData.length, (index) => MyDownloader());
     super.initState();
   }
@@ -48,13 +75,13 @@ class _ContentListScreenState extends State<ContentListScreen> {
         title: ListTile(
           title: Text(
             widget.branchName,
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.w600,
             ),
           ),
           subtitle: Text(
             "${widget.year} (${widget.content})",
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -144,9 +171,9 @@ class _ContentListScreenState extends State<ContentListScreen> {
                                         ),
                                       )
                                     else
-                                      Text(
+                                      const Text(
                                         StringConstants.downloading,
-                                        style: const TextStyle(
+                                        style: TextStyle(
                                           fontSize: 5.0,
                                           fontWeight: FontWeight.w600,
                                         ),
@@ -175,7 +202,7 @@ class _ContentListScreenState extends State<ContentListScreen> {
                                       ],
                                     ),
                                   )
-                                : FittedBox(
+                                : const FittedBox(
                                     child: Column(
                                       children: [
                                         Icon(

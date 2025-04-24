@@ -90,10 +90,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         fit: BoxFit.cover,
                       ),
                       const SizedBox(height: 10.0),
-                      const Text(
-                        "Student Name",
+                      Text(
+                        username,
                         textAlign: TextAlign.center,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 22.0,
                           fontWeight: FontWeight.w600,

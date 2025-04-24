@@ -5,6 +5,7 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get_thumbnail_video/index.dart';
 import 'package:get_thumbnail_video/video_thumbnail.dart';
 import 'package:intl/intl.dart';
@@ -12,6 +13,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../controllers/data_controller.dart';
 import '../constants/storage_constants.dart';
 import '../global/global.dart';
 
@@ -26,8 +28,8 @@ class UtilityMethods {
 
     if (token.isNotEmpty && userId.isNotEmpty) {
       await Future.wait([
-        // Get.put(UserController()).getUserDetails(),
-        // Get.put(UserController()).getUsers(),
+        Get.put(DataController()).getBranchesAndYears(),
+        Get.put(DataController()).getContents(),
       ]);
     }
   }

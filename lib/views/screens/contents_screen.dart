@@ -1,6 +1,6 @@
-import 'package:study_buddy/views/screens/content_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:study_buddy/views/screens/content_list_screen.dart';
 
 import '../../common/constants/asset_constants.dart';
 import '../../common/constants/string_constants.dart';
@@ -39,13 +39,13 @@ class _ContentsScreenState extends State<ContentsScreen> {
         title: ListTile(
           title: Text(
             widget.branchName,
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.w600,
             ),
           ),
           subtitle: Text(
             widget.year,
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -68,7 +68,7 @@ class _ContentsScreenState extends State<ContentsScreen> {
               leading: Image.asset(contentImages[index]),
               title: Text(
                 contentNames[index],
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 20.0,
                   fontWeight: FontWeight.w600,
                 ),

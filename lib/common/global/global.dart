@@ -10,6 +10,8 @@ late String userEmail;
 
 AuthController authController = Get.put(AuthController());
 
+const String apiBaseUrl = "<<URL>>";
+
 final documents = [
   {
     'name': 'Android Programming Cookbook',
@@ -53,5 +55,3 @@ final videos = [
         'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4'
   }
 ];
-
-const String apiBaseUrl = "https://unduly-enhanced-sole.ngrok-free.app";
