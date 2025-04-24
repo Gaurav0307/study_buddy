@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:study_buddy/views/screens/years_screen.dart';
@@ -21,6 +19,7 @@ class _BranchesScreenState extends State<BranchesScreen> {
     "Mechanical",
     "Electrical",
   ];
+
   List<String> branchImages = [
     AssetConstants.computerEng,
     AssetConstants.civilEng,
@@ -33,8 +32,6 @@ class _BranchesScreenState extends State<BranchesScreen> {
   @override
   void initState() {
     super.initState();
-
-    log("Data :-> ${dataController.branchesAndYearsModel.value.data}");
 
     branchNames =
         dataController.branchesAndYearsModel.value.data!.branches!.toList();
