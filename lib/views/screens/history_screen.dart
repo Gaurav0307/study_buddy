@@ -108,7 +108,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue.shade100,
-        title: Text(
+        title: const Text(
           StringConstants.history,
           style: TextStyle(
             fontWeight: FontWeight.w600,
@@ -120,14 +120,14 @@ class _HistoryScreenState extends State<HistoryScreen> {
               onPressed: () {
                 deleteAll();
               },
-              icon: Icon(Icons.delete_forever),
+              icon: const Icon(Icons.delete_forever),
             ),
-          SizedBox(width: 20.0),
+          const SizedBox(width: 20.0),
         ],
       ),
       body: Visibility(
         visible: allData.isNotEmpty,
-        replacement: NoData(),
+        replacement: const NoData(),
         child: ListView.builder(
           padding: const EdgeInsets.symmetric(
             horizontal: 10.0,
@@ -212,9 +212,9 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                       ),
                                     )
                                   else
-                                    Text(
+                                    const Text(
                                       StringConstants.downloading,
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontSize: 5.0,
                                         fontWeight: FontWeight.w600,
                                       ),
@@ -225,7 +225,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                           : myDownloaderList[index].status.value ==
                                       "downloaded" ||
                                   myDownloaderList[index].isDownloaded(url)
-                              ? FittedBox(
+                              ? const FittedBox(
                                   child: Column(
                                     children: [
                                       Icon(
@@ -243,7 +243,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                     ],
                                   ),
                                 )
-                              : FittedBox(
+                              : const FittedBox(
                                   child: Column(
                                     children: [
                                       Icon(

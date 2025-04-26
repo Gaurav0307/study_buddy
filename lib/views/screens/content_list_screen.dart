@@ -38,7 +38,7 @@ class _ContentListScreenState extends State<ContentListScreen> {
 
       allData = [
         ...dataController.contentModel.value.data!.map((e) {
-          if (e.questionType == "image" || e.questionType == "pdf") {
+          if (e.questionType != "video") {
             return {
               "name": e.question,
               "link": UtilityMethods.getProperFileUrl(e.image ?? "")
