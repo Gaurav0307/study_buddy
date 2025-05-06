@@ -29,7 +29,6 @@ class UtilityMethods {
     if (token.isNotEmpty && userId.isNotEmpty) {
       await Future.wait([
         Get.put(DataController()).getBranchesAndYears(),
-        Get.put(DataController()).getContents(),
       ]);
     }
   }

@@ -10,7 +10,7 @@ late String userEmail;
 
 AuthController authController = Get.put(AuthController());
 
-const String apiBaseUrl = "<<URL>>";
+const String apiBaseUrl = "https://happy-marten-miserably.ngrok-free.app";
 
 final documents = [
   {

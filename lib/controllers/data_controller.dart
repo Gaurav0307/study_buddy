@@ -77,11 +77,11 @@ class DataController extends GetxController with BaseController {
     isLoading.value = false;
   }
 
-  Future<void> getContents() async {
+  Future<void> getContents(String branch, String year) async {
     isLoading.value = true;
 
     var baseUrl = ApiConstants.baseUrl;
-    var endpoint = ApiConstants.contents;
+    var endpoint = "${ApiConstants.contents}?branch=$branch&year=$year";
 
     var responseJson =
         await BaseClient().get(baseUrl, endpoint, null).catchError(

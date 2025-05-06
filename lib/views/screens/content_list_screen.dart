@@ -30,15 +30,19 @@ class _ContentListScreenState extends State<ContentListScreen> {
 
   @override
   void initState() {
-    if (widget.content == StringConstants.notes ||
-        widget.content == StringConstants.questionPapers ||
-        widget.content == StringConstants.subjects ||
-        widget.content == StringConstants.syllabus) {
-      // allData = [...documents, ...images];
+    // if (widget.content == StringConstants.notes ||
+    //     widget.content == StringConstants.questionPapers ||
+    //     widget.content == StringConstants.subjects ||
+    //     widget.content == StringConstants.syllabus) {
+    //   allData = [...documents, ...images];
+    // } else {
+    //   allData = [...videos];
+    // }
 
+    if (widget.content == StringConstants.notes) {
       allData = [
         ...dataController.contentModel.value.data!.map((e) {
-          if (e.questionType != "video") {
+          if (e.questionType == "notes") {
             return {
               "name": e.question,
               "link": UtilityMethods.getProperFileUrl(e.image ?? "")
@@ -46,12 +50,43 @@ class _ContentListScreenState extends State<ContentListScreen> {
           }
         })
       ];
-    } else {
-      // allData = [...videos];
-
+    } else if (widget.content == StringConstants.questionPapers) {
+      allData = [
+        ...dataController.contentModel.value.data!.map((e) {
+          if (e.questionType == "que_paper") {
+            return {
+              "name": e.question,
+              "link": UtilityMethods.getProperFileUrl(e.image ?? "")
+            };
+          }
+        })
+      ];
+    } else if (widget.content == StringConstants.videos) {
       allData = [
         ...dataController.contentModel.value.data!.map((e) {
           if (e.questionType == "video") {
+            return {
+              "name": e.question,
+              "link": UtilityMethods.getProperFileUrl(e.image ?? "")
+            };
+          }
+        })
+      ];
+    } else if (widget.content == StringConstants.subjects) {
+      allData = [
+        ...dataController.contentModel.value.data!.map((e) {
+          if (e.questionType == "subject") {
+            return {
+              "name": e.question,
+              "link": UtilityMethods.getProperFileUrl(e.image ?? "")
+            };
+          }
+        })
+      ];
+    } else if (widget.content == StringConstants.syllabus) {
+      allData = [
+        ...dataController.contentModel.value.data!.map((e) {
+          if (e.questionType == "syllabus") {
             return {
               "name": e.question,
               "link": UtilityMethods.getProperFileUrl(e.image ?? "")

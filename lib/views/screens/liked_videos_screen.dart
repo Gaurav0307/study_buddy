@@ -1,7 +1,7 @@
-import 'package:study_buddy/common/constants/string_constants.dart';
-import 'package:study_buddy/common/global/global.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:study_buddy/common/constants/string_constants.dart';
+import 'package:study_buddy/common/global/global.dart';
 
 import '../../common/services/file_downloader.dart';
 import '../widgets/no_data.dart';
@@ -21,13 +21,20 @@ class _LikedVideosScreenState extends State<LikedVideosScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     var key = "likedVideos";
-    allData = [
-      ...videos.where((video) =>
-          sharedPreferences!.containsKey(key) &&
-          sharedPreferences!.getStringList(key)!.contains(video['link']!))
-    ];
+    // allData = [
+    //   ...videos.where((video) =>
+    //       sharedPreferences!.containsKey(key) &&
+    //       sharedPreferences!.getStringList(key)!.contains(video['link']!))
+    // ];
+
+    if (sharedPreferences!.containsKey(key)) {
+      var i = 1;
+      for (var link in sharedPreferences!.getStringList(key)!) {
+        allData.add({"name": "Liked Video - $i", "link": link});
+        i++;
+      }
+    }
 
     myDownloaderList = List.generate(allData.length, (index) => MyDownloader());
     super.initState();
@@ -38,7 +45,7 @@ class _LikedVideosScreenState extends State<LikedVideosScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue.shade100,
-        title: Text(
+        title: const Text(
           StringConstants.likedVideos,
           style: TextStyle(
             fontWeight: FontWeight.w600,
@@ -47,7 +54,7 @@ class _LikedVideosScreenState extends State<LikedVideosScreen> {
       ),
       body: Visibility(
         visible: allData.isNotEmpty,
-        replacement: NoData(),
+        replacement: const NoData(),
         child: ListView.builder(
           padding: const EdgeInsets.symmetric(
             horizontal: 10.0,
